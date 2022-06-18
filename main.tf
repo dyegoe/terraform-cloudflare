@@ -12,6 +12,6 @@ resource "cloudflare_record" "this" {
   type     = each.value.type
   value    = each.value.value
   ttl      = each.value.ttl
-  priority = try(each.value.priority, null)
+  priority = each.value.priority == "" ? null : each.value.priority
   proxied  = each.value.proxied
 }
