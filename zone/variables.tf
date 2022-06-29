@@ -176,11 +176,6 @@ variable "ssl" {
   type        = string
   default     = "strict"
 }
-variable "tls_1_2_only" {
-  description = "Default: off"
-  type        = string
-  default     = "off"
-}
 variable "tls_1_3" {
   description = "Default: on"
   type        = string
@@ -192,9 +187,9 @@ variable "tls_client_auth" {
   default     = "off"
 }
 variable "universal_ssl" {
-  description = "Default: ''"
+  description = "Default: on"
   type        = string
-  default     = ""
+  default     = "on"
 }
 variable "visitor_ip" {
   description = "Default: on"

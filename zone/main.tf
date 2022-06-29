@@ -39,7 +39,6 @@ resource "cloudflare_zone_settings_override" "this" {
     security_level            = var.security_level
     server_side_exclude       = var.server_side_exclude
     ssl                       = var.ssl
-    tls_1_2_only              = var.tls_1_2_only
     tls_1_3                   = var.tls_1_3
     tls_client_auth           = var.tls_client_auth
     universal_ssl             = var.universal_ssl
