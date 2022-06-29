@@ -217,7 +217,7 @@ variable "zero_rtt" {
   default     = "off"
 }
 variable "minify" {
-  type = list(map(string))
+  # type = list(map(string))
   default = [
     {
       css  = "off"
@@ -227,7 +227,7 @@ variable "minify" {
   ]
 }
 variable "mobile_redirect" {
-  type = list(object())
+  # type = list(object())
   default = [
     {
       mobile_subdomain = ""
@@ -237,7 +237,7 @@ variable "mobile_redirect" {
   ]
 }
 variable "security_header" {
-  type = list(object())
+  # type = list(object())
   default = [
     {
       enabled            = false
