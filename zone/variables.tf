@@ -217,34 +217,25 @@ variable "zero_rtt" {
   default     = "off"
 }
 variable "minify" {
-  # type = list(map(string))
-  default = [
-    {
-      css  = "off"
-      html = "off"
-      js   = "off"
-    },
-  ]
+  default = {
+    css  = "off"
+    html = "off"
+    js   = "off"
+  }
 }
 variable "mobile_redirect" {
-  # type = list(object())
-  default = [
-    {
-      mobile_subdomain = ""
-      status           = "off"
-      strip_uri        = false
-    },
-  ]
+  default = {
+    mobile_subdomain = ""
+    status           = "off"
+    strip_uri        = false
+  }
 }
 variable "security_header" {
-  # type = list(object())
-  default = [
-    {
-      enabled            = false
-      include_subdomains = false
-      max_age            = 0
-      nosniff            = false
-      preload            = false
-    },
-  ]
+  default = {
+    enabled            = false
+    include_subdomains = false
+    max_age            = 0
+    nosniff            = false
+    preload            = false
+  }
 }

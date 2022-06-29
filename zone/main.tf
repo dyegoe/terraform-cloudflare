@@ -47,9 +47,23 @@ resource "cloudflare_zone_settings_override" "this" {
     waf                       = var.waf
     websockets                = var.websockets
     zero_rtt                  = var.zero_rtt
-    minify                    = var.minify
-    mobile_redirect           = var.mobile_redirect
-    security_header           = var.security_header
+    minify {
+      css  = var.minify.css
+      html = var.minify.html
+      js   = var.minify.js
+    }
+    mobile_redirect {
+      mobile_subdomain = var.mobile_redirect.mobile_subdomain
+      status           = var.mobile_redirect.status
+      strip_uri        = var.mobile_redirect.strip_uri
+    }
+    security_header {
+      enabled            = var.security_header.enabled
+      include_subdomains = var.security_header.include_subdomains
+      max_age            = var.security_header.max_age
+      nosniff            = var.security_header.nosniff
+      preload            = var.security_header.preload
+    }
 
     # cname_flattening            = "flatten_at_root" # read-only
     # http2                       = "on"              # read-only
