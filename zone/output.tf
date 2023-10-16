@@ -30,8 +30,3 @@ output "verification_key" {
   description = "Contains the TXT record value to validate domain ownership. This is only populated for zones of type partial."
   value       = cloudflare_zone.this.verification_key
 }
-
-output "initial_settings" {
-  description = "Settings present in the zone at the time the resource is created. This will be used to restore the original settings when this resource is destroyed."
-  value       = cloudflare_zone_settings_override.this.initial_settings
-}
