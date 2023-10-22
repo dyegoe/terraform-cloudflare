@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+---
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  TFLINT_VERSION: v0.48.0
+
+jobs:
+  terraform-fmt:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: dflook/terraform-fmt@v1
+        name: terraform fmt zone
+        with:
+          path: zone
+
+      - uses: dflook/terraform-fmt@v1
+        name: terraform fmt records
+        with:
+          path: records
+
+      - uses: dflook/terraform-fmt@v1
+        name: terraform fmt dnssec
+        with:
+          path: dnssec
+  
+
+  tflint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setup TFLint
+        with:
+          tflint_version: ${{ env.TFLINT_VERSION }}
+
+      - name: Show version
+        run: tflint --version
+
+      - name: Init TFLint
+        run: tflint --init
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Run TFLint
+        run: tflint --recursive -c .tflint.hcl
+
+  terraform-docs:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Render terraform docs inside the README.md and push changes back to PR branch
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: .
+          config-file: .terraform-docs.yaml
+          git-push: "true"
