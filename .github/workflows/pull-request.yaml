@@ -19,14 +19,20 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - uses: dflook/terraform-fmt@v1
-        name: terraform fmt root
+        name: terraform fmt zone
         with:
-          path: .
+          path: zone
 
       - uses: dflook/terraform-fmt@v1
-        name: terraform fmt examples
+        name: terraform fmt records
         with:
-          path: examples
+          path: records
+
+      - uses: dflook/terraform-fmt@v1
+        name: terraform fmt dnssec
+        with:
+          path: dnssec
+  
 
   tflint:
     runs-on: ubuntu-22.04
