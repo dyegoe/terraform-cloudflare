@@ -7,7 +7,7 @@ resource "cloudflare_record" "this" {
   zone_id  = data.cloudflare_zone.this.id
   name     = each.value.name == "@" ? var.zone : each.value.name
   type     = each.value.type
-  value    = each.value.value
+  content  = each.value.value
   ttl      = each.value.proxied ? "1" : each.value.ttl
   priority = each.value.priority == "" ? null : each.value.priority
   proxied  = each.value.proxied
